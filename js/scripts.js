@@ -1,5 +1,6 @@
 // Business logic for AddressBook
 
+//why do we do curly braces here?
 function AddressBook() {
   this.contacts = {};
   this.currentId = 0;
@@ -30,7 +31,7 @@ AddressBook.prototype.deleteContact = function(id) {
   return true;
 }
 
-// Business logic for Contacts
+// UI logic for Contacts
 function Contact(firstName, lastName, phoneNumber) {
   this.firstName = firstName;
   this.lastName = lastName;
