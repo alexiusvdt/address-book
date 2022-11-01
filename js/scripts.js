@@ -30,10 +30,11 @@ AddressBook.prototype.deleteContact = function(id) {
 };
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, emailAddress) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.emailAddress = emailAddress;
 }
 
 Contact.prototype.fullName = function() {
@@ -63,9 +64,10 @@ function displayContactDetails(event) {
   document.querySelector(".first-name").innerText = contact.firstName;
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
+  document.querySelector(".email-address").innerText = contact.emailAddress;
   document.querySelector("div#contact-details").removeAttribute("class");
   document.querySelector("button.delete").setAttribute("id", contact.id);
-  document.querySelector("div#contact-details").removeAttribute("class");
+  // document.querySelector("div#contact-details").removeAttribute("class"); why duplicate?
 }
 
 function handleFormSubmission(event) {
@@ -74,8 +76,9 @@ function handleFormSubmission(event) {
   const inputtedFirstName = document.querySelector("input#new-first-name").value;
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
+  const inputtedEmail = document.querySelector("input#new-email-address").value;
   //creates newContact object using above
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail);
   //appends to addressbook
   addressBook.addContact(newContact);
   // prints
@@ -84,6 +87,7 @@ function handleFormSubmission(event) {
   document.querySelector("input#new-first-name").value = null;
   document.querySelector("input#new-last-name").value = null;
   document.querySelector("input#new-phone-number").value = null;
+  document.querySelector("input#new-email-address").value = null;
 }
 
 function handleDelete(event) {
