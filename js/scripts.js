@@ -35,8 +35,6 @@ function Addresses(workAddress, homeAddress) {
   this.homeAddress = homeAddress;
 }
 
-
-
 // Business Logic for Contacts ---------
 function Contact(firstName, lastName, phoneNumber, emailAddress, workAddress, homeAddress) {
   this.firstName = firstName;
@@ -58,8 +56,6 @@ function listContacts(addressBookToDisplay) {
   let contactsDiv = document.querySelector("div#contacts");
   contactsDiv.innerText =  null;
   const ul = document.createElement("ul");
-  // let keysarray = object.keys (addresbooktodisplay.contacts)...etc
-  //push to array & print the .map array?
   Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
     const contact = addressBookToDisplay.findContact(key);
     const li = document.createElement("li");
@@ -76,8 +72,8 @@ function displayContactDetails(event) {
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector(".email-address").innerText = contact.emailAddress;
-  document.querySelector(".work-address").innerText = contact.workAddress;
-  document.querySelector(".home-address").innerText = contact.homeAddress;
+  document.querySelector(".work-address").innerText = contact.addresses.workAddress;
+  document.querySelector(".home-address").innerText = contact.addresses.homeAddress;
   document.querySelector("div#contact-details").removeAttribute("class");
   document.querySelector("button.delete").setAttribute("id", contact.id);
   // document.querySelector("div#contact-details").removeAttribute("class"); why duplicate?
