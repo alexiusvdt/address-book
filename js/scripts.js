@@ -29,13 +29,21 @@ AddressBook.prototype.deleteContact = function(id) {
   return true;
 };
 
+// Business logic for Addresses
+function Addresses(workAddress, homeAddress) {
+  this.workAddress = workAddress;
+  this.homeAddress = homeAddress;
+}
+
+
+
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber, emailAddress, physicalAddress) {
+function Contact(firstName, lastName, phoneNumber, emailAddress, workAddress, homeAddress) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
   this.emailAddress = emailAddress;
-  this.physicalAddress = physicalAddress
+  this.addresses = new Addresses(workAddress, homeAddress);
 }
 
 Contact.prototype.fullName = function() {
@@ -50,6 +58,8 @@ function listContacts(addressBookToDisplay) {
   let contactsDiv = document.querySelector("div#contacts");
   contactsDiv.innerText =  null;
   const ul = document.createElement("ul");
+  // let keysarray = object.keys (addresbooktodisplay.contacts)...etc
+  //push to array & print the .map array?
   Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
     const contact = addressBookToDisplay.findContact(key);
     const li = document.createElement("li");
@@ -66,7 +76,8 @@ function displayContactDetails(event) {
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector(".email-address").innerText = contact.emailAddress;
-  document.querySelector(".physical-address").innerText = contact.physicalAddress;
+  document.querySelector(".work-address").innerText = contact.workAddress;
+  document.querySelector(".home-address").innerText = contact.homeAddress;
   document.querySelector("div#contact-details").removeAttribute("class");
   document.querySelector("button.delete").setAttribute("id", contact.id);
   // document.querySelector("div#contact-details").removeAttribute("class"); why duplicate?
@@ -79,9 +90,10 @@ function handleFormSubmission(event) {
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const inputtedEmail = document.querySelector("input#new-email-address").value;
-  const inputtedPhysicalAddress = document.querySelector("input#new-physical-address").value;
+  const inputtedWorkAddress = document.querySelector("input#new-work-address").value;
+  const inputtedHomeAddress = document.querySelector("input#new-home-address").value;
   //creates newContact object using above
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, inputtedPhysicalAddress);
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, inputtedWorkAddress, inputtedHomeAddress);
   //appends to addressbook
   addressBook.addContact(newContact);
   // prints
@@ -91,7 +103,8 @@ function handleFormSubmission(event) {
   document.querySelector("input#new-last-name").value = null;
   document.querySelector("input#new-phone-number").value = null;
   document.querySelector("input#new-email-address").value = null;
-  document.querySelector("input#new-physical-address").value = null;
+  document.querySelector("input#new-work-address").value = null;
+  document.querySelector("input#new-home-address").value = null;
 }
 
 function handleDelete(event) {
